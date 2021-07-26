@@ -7,8 +7,8 @@ public class VaccinationCenter {
     private String name;
     private Integer nVacunados;
     private Integer nCompletamenteVacunados;
-    private Set<String> vacunados = new HashSet<String>();
-    private Set<String> completamente = new HashSet<String>();
+    private Set<String> vacunados = new HashSet<>();
+    private Set<String> completamente = new HashSet<>();
 
     public boolean compare(String name) {
         return this.name.equals(name);
@@ -20,7 +20,7 @@ public class VaccinationCenter {
         this.nCompletamenteVacunados = 0;
     }
 
-    public void registrarVacunado(int age, String dni) {
+    public void registrarVacunado(String dni) {
         if (vacunados.contains(dni)) {
             completamente.add(dni);
         } else {

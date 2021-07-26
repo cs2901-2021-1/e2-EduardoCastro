@@ -7,8 +7,8 @@ public class VaccinationCenter {
     private String name;
     private Integer nVacunados;
     private Integer nCompletamenteVacunados;
-<span class="nc" id="L10">    private Set&lt;String&gt; vacunados = new HashSet&lt;String&gt;();</span>
-<span class="nc" id="L11">    private Set&lt;String&gt; completamente = new HashSet&lt;String&gt;();</span>
+<span class="nc" id="L10">    private Set&lt;String&gt; vacunados = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L11">    private Set&lt;String&gt; completamente = new HashSet&lt;&gt;();</span>
 
     public boolean compare(String name) {
 <span class="nc" id="L14">        return this.name.equals(name);</span>
@@ -20,7 +20,7 @@ public class VaccinationCenter {
 <span class="nc" id="L20">        this.nCompletamenteVacunados = 0;</span>
 <span class="nc" id="L21">    }</span>
 
-    public void registrarVacunado(int age, String dni) {
+    public void registrarVacunado(String dni) {
 <span class="nc bnc" id="L24" title="All 2 branches missed.">        if (vacunados.contains(dni)) {</span>
 <span class="nc" id="L25">            completamente.add(dni);</span>
         } else {
