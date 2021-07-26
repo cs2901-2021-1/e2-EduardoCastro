@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">e2-EduardoCastro</a> &gt; <a href="index.source.html" class="el_package">vaccination</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package vaccination;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Logger;
+
+public class App {
+<span class="fc" id="L8">    private static final Logger logger = Logger.getLogger(App.class.getName());</span>
+<span class="fc" id="L9">    private static final Scanner input = new Scanner(System.in);</span>
+
+<span class="fc" id="L11">    private static ArrayList&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L12">    private static ArrayList&lt;VaccinationCenter&gt; centers = new ArrayList&lt;&gt;();</span>
+
+    private App() {
+    }
+
+    public static void start() {
+        String name;
+        String password;
+<span class="fc" id="L20">        logger.info(&quot;Log in&quot;);</span>
+<span class="fc" id="L21">        logger.info(&quot;Username: &quot;);</span>
+<span class="fc" id="L22">        name = input.next();</span>
+<span class="fc" id="L23">        logger.info(&quot;Password: &quot;);</span>
+<span class="nc" id="L24">        password = input.next();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (!login(name, password)) {</span>
+<span class="nc" id="L26">            logger.info(&quot;Fail to log in.&quot;);</span>
+<span class="nc" id="L27">            return;</span>
+        }
+<span class="nc" id="L29">        actions();</span>
+<span class="nc" id="L30">    }</span>
+
+    public static void register(String name, String password) {
+<span class="fc" id="L33">        users.add(new User(name, password));</span>
+<span class="fc" id="L34">    }</span>
+
+    public static boolean login(String name, String password) {
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        for (User user : users)</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">            if (user.auth(name, password)) return true;</span>
+<span class="nc" id="L39">        return false;</span>
+    }
+
+    public static void actions() {
+<span class="nc" id="L43">        var status = true;</span>
+        do {
+<span class="nc" id="L45">            logger.info(&quot;=== Acciones ==&quot;);</span>
+<span class="nc" id="L46">            logger.info(&quot;(0) Cerrar sesión&quot;);</span>
+<span class="nc" id="L47">            logger.info(&quot;(1) Dar un centro de alta&quot;);</span>
+<span class="nc" id="L48">            logger.info(&quot;(2) Dar un centro de baja&quot;);</span>
+<span class="nc" id="L49">            logger.info(&quot;(3) Reporte&quot;);</span>
+<span class="nc" id="L50">            logger.info(&quot;Respuesta: &quot;);</span>
+<span class="nc" id="L51">            var response = input.nextInt();</span>
+<span class="nc bnc" id="L52" title="All 5 branches missed.">            switch (response) {</span>
+                case 0:
+<span class="nc" id="L54">                    status = false;</span>
+<span class="nc" id="L55">                    break;</span>
+                case 1:
+<span class="nc" id="L57">                    logger.info(&quot;Dar de alta a un centro&quot;);</span>
+<span class="nc" id="L58">                    logger.info(&quot;Nombre del centro: &quot;);</span>
+<span class="nc" id="L59">                    createCenter(input.next());</span>
+<span class="nc" id="L60">                    break;</span>
+                case 2:
+<span class="nc" id="L62">                    logger.info(&quot;Dar de baja a un centro&quot;);</span>
+<span class="nc" id="L63">                    logger.info(&quot;Centros: &quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                    for (VaccinationCenter center : centers) {</span>
+<span class="nc" id="L65">                        String out = &quot;- &quot; + center.getName();</span>
+<span class="nc" id="L66">                        logger.info(out);</span>
+<span class="nc" id="L67">                    }</span>
+<span class="nc" id="L68">                    logger.info(&quot;Nombre del centro a dar de baja: &quot;);</span>
+<span class="nc" id="L69">                    deleteCenter(input.next());</span>
+<span class="nc" id="L70">                    break;</span>
+                case 3:
+<span class="nc" id="L72">                    break;</span>
+                default:
+<span class="nc" id="L74">                    status = false;</span>
+            }
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        } while (status);</span>
+<span class="nc" id="L77">    }</span>
+
+    public static void createCenter(String name) {
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (centers.size() &lt; 50) centers.add(new VaccinationCenter(name));</span>
+<span class="nc" id="L81">    }</span>
+
+    public static void deleteCenter(String name) {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        for (var i = 0; i &lt; centers.size(); ++i) {</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if (centers.get(i).compare(name)) {</span>
+<span class="nc" id="L86">                centers.remove(i);</span>
+            }
+        }
+<span class="nc" id="L89">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

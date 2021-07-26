@@ -11,6 +11,9 @@ public class App {
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<VaccinationCenter> centers = new ArrayList<>();
 
+    private App() {
+    }
+
     public static void start() {
         String name;
         String password;
@@ -37,15 +40,15 @@ public class App {
     }
 
     public static void actions() {
-        boolean status = true;
+        var status = true;
         do {
             logger.info("=== Acciones ==");
-            logger.info("(0) Exit");
+            logger.info("(0) Cerrar sesión");
             logger.info("(1) Dar un centro de alta");
             logger.info("(2) Dar un centro de baja");
             logger.info("(3) Reporte");
             logger.info("Respuesta: ");
-            int response = input.nextInt();
+            var response = input.nextInt();
             switch (response) {
                 case 0:
                     status = false;
@@ -74,11 +77,11 @@ public class App {
     }
 
     public static void createCenter(String name) {
-        centers.add(new VaccinationCenter(name));
+        if (centers.size() < 50) centers.add(new VaccinationCenter(name));
     }
 
     public static void deleteCenter(String name) {
-        for (int i = 0; i < centers.size(); ++i) {
+        for (var i = 0; i < centers.size(); ++i) {
             if (centers.get(i).compare(name)) {
                 centers.remove(i);
             }
